@@ -35,18 +35,25 @@ O middleware de autenticação é utilizado para garantir que a requisição sej
 
 exemplo:
 
-function authenticate(req, res, next) {
-  const token = req.headers['authorization'];
+const authMid = (req, res, next) => {
   
-  if (!token) {
-    return res.status(403).json({ message: 'No token provided' });
-  }
-  
-  "Verifique o token (por exemplo, com JWT) e decodifique-o, se o token for válido, passa para o próximo middleware"
-  next();
-}
+    const token = req.headers['authorization'];
 
-app.use(authenticate);
+    
+    if (!token) {
+        return res.status(401).json({ message: 'Token de autenticação não fornecido.' });
+    }
+
+   
+    if (token !== '12345') {
+        return res.status(403).json({ message: 'Token inválido.' });
+    }
+
+    
+    next();
+};
+
+export default authMid;
 
 3)Middleware de Autorização
 Este middleware é usado para garantir que o usuário autenticado tenha permissões para acessar uma rota específica. Ele verifica, por exemplo, se o usuário tem o papel correto (como "admin", "moderador") para acessar uma funcionalidade ou recurso.

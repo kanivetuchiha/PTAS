@@ -1,15 +1,12 @@
-import http from 'http'
+import express from 'express';
+import router from './routes/rotas.js'
+const app = express();
+const porta = process.env.PORT || 3000;
 
-// sever
-const sever = http.createServer((req,resp) => {
-console.log(req.method, req.url);
-    resp.end("ooohihinaooohihinaa")
+// rotas
+app.use('/',router)
+
+
+app.listen(porta, () => {
+    console.log(`Servidor rodando na porta ${porta}`);
 });
-sever.listen(3000)
-
-
-
-
-
-
-
