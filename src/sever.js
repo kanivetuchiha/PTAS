@@ -3,7 +3,6 @@ import router from './routes/rotas.js'
 const app = express();
 const porta = process.env.PORT || 3000;
 
-// rotas
 app.use('/',router)
 
 
